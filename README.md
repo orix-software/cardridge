@@ -1,0 +1,1 @@
+Build cardridge for telestrat and twilighte card (from source code) and push it in repo.orix.oric.org
