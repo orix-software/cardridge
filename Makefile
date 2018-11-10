@@ -3,6 +3,7 @@ CC=cl65
 CFLAGS=-ttelestrat
 LDFILES=
 ASCA65=ca65
+ORIX_ROM=roms
 
 all : init build
 .PHONY : all
@@ -35,6 +36,8 @@ init:
 	rm -rf basic
 	rm -rf orix
 	rm -rf monitor
+	mkdir -p roms/oricutron/6502/
+	mkdir -p roms/oricutron/65c02/
 	mkdir -p roms/telestrat/6502/
 	mkdir -p roms/telestrat/65c02/
 	mkdir -p roms/twilighte_card_v05/6502/		
@@ -68,11 +71,19 @@ build:
 	cat basic/bin/basic_noram.rom  >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat orix/build/usr/share/orix-1/6502/kernel.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 
+	echo Generating for Oricutron
+	cp empty-rom/empty-rom.rom roms/oricutron/6502/
+	cp monitor/monitor.rom roms/oricutron/6502/
+	cp shell/shell.rom roms/oricutron/6502/
+	cp basic/bin/basic_noram.rom roms/oricutron/6502/
+	cp orix/build/usr/share/orix-1/6502/kernel.rom roms/oricutron/6502/
+
 test:
+	cp README.md roms/
 	cd roms && tar -c * > ../roms.tar &&	cd ..
 	filepack roms.tar roms.pkg
 	gzip roms.tar
 	mv roms.tar.gz $(ORIX_ROM).tgz
-	php buildTestAndRelease/publish/publish2repo.php roms.pkg ${hash} 6502 pkg alpha
-	php buildTestAndRelease/publish/publish2repo.php roms.tgz ${hash} 6502 tgz alpha
+	php buildTestAndRelease/publish/publish2repo.php $(ORIX_ROM).pkg ${hash} 6502 pkg alpha
+	php buildTestAndRelease/publish/publish2repo.php $(ORIX_ROM).tgz ${hash} 6502 tgz alpha
 
