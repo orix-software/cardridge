@@ -65,6 +65,7 @@ build:
 	git clone	https://github.com/orix-software/forth.git
 	git clone	https://github.com/orix-software/kernel.git
 	mkdir buildTestAndRelease/${HOMEDIRBIN}
+	cd buildTestAndRelease && ls -l
 	cd buildTestAndRelease && ./make.sh ${INITIAL_FOLDER}/${HOMEDIRBIN}
 	cd shell && make
 	cd empty-rom/ && make
