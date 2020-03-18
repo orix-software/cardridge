@@ -1,0 +1,16 @@
+[submodule "src/kernel"]
+	path = src/kernel
+	url = git://github.com/orix-software/kernel.git
+[submodule "src/shell"]
+	path = src/shell
+	url = git://github.com/orix-software/shell.git
+[submodule "src/forth"]
+	path = src/forth
+	url = git://github.com/orix-software/forth.git	
+[submodule "src/basic"]
+	path = src/basic
+	url = git://github.com/orix-software/basic.git		
+[submodule "src/empty-rom"]
+	path = src/empty-rom
+	url = git://github.com/orix-software/empty-rom.git		
+

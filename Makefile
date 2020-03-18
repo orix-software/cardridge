@@ -4,28 +4,16 @@ CFLAGS=-ttelestrat
 LDFILES=
 ASCA65=ca65
 ORIX_ROM=roms
+BRANCH=2020.1
+
 
 all : init build twilightecard telestratcardridge
 .PHONY : all
 
-#HOMEDIR=/home/travis/bin/
-#HOMEDIR_ORIX=/home/travis/build/oric-software/orix
-#ORIX_VERSION=1
-
-#SOURCE_BANK7=src/kernel.asm
-#SOURCE_BANK5=src/orixbank5.asm
-#SOURCE_BANK4=src/monitor_bank4.asm
-#SOURCE_BANK1=src/empty.asm
-
-#TELESTRAT_TARGET_RELEASE=release/telestrat
-
-#ORIX_ROM=orix
-
-#ATMOS_ROM=ROMCH376_noram.rom
-
-#MYDATE = $(shell date +"%Y-%m-%d %H:%m")
-
-#ASFLAGS= -W -e error.txt -l xa_labels.txt -D__DATEBUILT__="$(MYDATE)"
+empty_rom_git=https://github.com/orix-software/empty-rom.git
+monitor_git=https://github.com/orix-software/monitor.git
+forth_git=https://github.com/orix-software/forth.git
+basic_git=https://github.com/orix-software/basic.git
 
 TELESTRAT_FOLDER=telestrat
 
@@ -34,19 +22,29 @@ HOMEDIRBIN=compiledir/
 INITIAL_FOLDER=`pwd`
 
 LIST="empty-rom shell basic orix monitor forth"
-
+clean:
+	rm -rf src/*
 init:
-	for I in ${LIST}; do echo rm $I; done
-	rm -rf empty-rom
-	rm -rf kernel
-	rm -rf shell
-	rm -rf basic
-	rm -rf orix
-	rm -rf monitor
-	rm -rf forth
-	rm -rf md2hlp
-	rm -rf buildTestAndRelease
-	rm -rf ${HOMEDIRBIN}
+	@echo Update kernel
+	@if [ -d "src/kernel" ]; then cd src/kernel && git pull && cd ../../ ; else cd src && git clone https://github.com/orix-software/kernel.git --recursive -b ${BRANCH}; fi 
+	@echo Update shell
+	@if [ -d "src/shell" ]; then  cd src/shell && rm -f src/build.inc && git pull && git submodule init && git submodule update --recursive --remote && cd ../../; else cd src && git clone https://github.com/orix-software/shell.git --recursive -b ${BRANCH}; fi 
+	@echo Update empty-rom
+	@if [ -d "src/empty-rom" ]; then  cd src/empty-rom  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(empty_rom_git)  && cd ..;fi 
+	@echo Update monitor
+	@if [ -d "src/monitor" ]; then  cd src/monitor  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(monitor_git)  && cd ..;fi 	
+	@echo Update forth
+	@if [ -d "src/forth" ]; then  cd src/monitor  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(forth_git)  && cd ..;fi 		
+	@echo Update basic
+	@if [ -d "src/basic" ]; then  cd src/monitor  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(basic_git)  && cd ..;fi 			
+	#rm -rf empty-rom
+	#rm -rf basic
+	#rm -rf orix
+	#rm -rf monitor
+	#rm -rf forth
+	#rm -rf md2hlp
+	#rm -rf buildTestAndRelease
+	#rm -rf ${HOMEDIRBIN}
 	mkdir -p roms/oricutron/6502/
 	mkdir -p roms/oricutron/65c02/
 	mkdir -p roms/telestrat/6502/
@@ -55,54 +53,134 @@ init:
 	mkdir -p roms/twilighte_card_v05/65c02/	
   
 build:
-	git clone	https://github.com/oric-software/buildTestAndRelease.git
-	git clone   https://github.com/assinie/md2hlp.git
-	git clone	https://github.com/orix-software/shell.git
-	git clone	https://github.com/orix-software/basic.git
-	git clone	https://github.com/orix-software/empty-rom.git
-	git clone	https://github.com/oric-software/orix.git
-	git clone	https://github.com/orix-software/monitor.git
-	git clone	https://github.com/orix-software/forth.git
-	git clone	https://github.com/orix-software/kernel.git
-	mkdir buildTestAndRelease/${HOMEDIRBIN}
-	cd buildTestAndRelease && ls -l
-	cd buildTestAndRelease && ./make.sh ${INITIAL_FOLDER}/${HOMEDIRBIN}
-	cd shell && make
-	cd empty-rom/ && make
-	cd orix/ && make
-	cd monitor && make
-	cd forth && make configure && make && make
+	#git clone	https://github.com/oric-software/buildTestAndRelease.git
+	#git clone   https://github.com/assinie/md2hlp.git
+
+
+	@echo "##########################"
+	@echo "#    Building Shell      #"
+	@echo "##########################"
+	@cd src/shell && make
+	@echo "##########################"
+	@echo "#    Building Empty rom  #"
+	@echo "##########################"
+	@cd src/empty-rom/ && make
+	@echo "##########################"
+	@echo "#    Building Kernel     #"
+	@echo "##########################"
+	@cd src/kernel/ && make
+	@echo "##########################"
+	@echo "#    Building Monitor    #"
+	@echo "##########################"	
+	@cd src/monitor && make
+	#@cd forth && make configure && make && make
 telestratcardridge:	
-	echo Generating for telestrat
+	@echo "###################################"
+	@echo "#    Build Telestrat cardridge    #"
+	@echo "###################################"	
+
+	echo Generating for telestrat First cardridge
 	cat empty-rom/empty-rom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat shell/shell.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat basic/bin/basic_noram.rom  >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat orix/build/usr/share/orix-1/6502/kernel.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	echo Generating for telestrat Second cardridge
+	cat forth/forth.rom > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat src/monitor/monitor.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat empty-rom/empty-rom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat empty-rom/empty-rom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	
+	
+	
+
 
 twilightecard:
-	echo Generating for Twilighte card 7 banks
-	cat empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/orix.rom
-	cat empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orix.rom
-	cat forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orix.rom
-	cat monitor/monitor.rom >> roms/twilighte_card_v05/6502/orix.rom
-	cat shell/shell.rom >> roms/twilighte_card_v05/6502/orix.rom
-	cat basic/bin/basic_noram.rom  >> roms/twilighte_card_v05/6502/orix.rom
-	cat orix/build/usr/share/orix-1/6502/kernel.rom >> roms/twilighte_card_v05/6502/orix.rom
-	echo Generating for Twilighte card 32 banks ROM
-	cat empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/orixa.rom
-	cat empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixa.rom
-	cat forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixa.rom
-	cat monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixa.rom
-	cat shell/shell.rom >> roms/twilighte_card_v05/6502/orixa.rom
-	cat basic/bin/basic_noram.rom  >> roms/twilighte_card_v05/6502/orixa.rom
-	cat orix/build/usr/share/orix-1/6502/kernela.rom >> roms/twilighte_card_v05/6502/orixa.rom
+	@echo "###################################"
+	@echo "#    Build Twilighte board ROM    #"
+	@echo "###################################"	
 
-	echo Generating for Oricutron
-	cp empty-rom/empty-rom.rom roms/oricutron/6502/
-	cp monitor/monitor.rom roms/oricutron/6502/
-	cp shell/shell.rom roms/oricutron/6502/
-	cp basic/bin/basic_noram.rom roms/oricutron/6502/
-	cp orix/build/usr/share/orix-1/6502/kernel.rom roms/oricutron/6502/
+#	echo Generating for Twilighte card 7 banks root usbkey
+#	cat empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/orix.rom
+#	cat empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orix.rom
+#	cat forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orix.rom
+#	cat monitor/monitor.rom >> roms/twilighte_card_v05/6502/orix.rom
+#	cat shell/shell.rom >> roms/twilighte_card_v05/6502/orix.rom
+#	cat basic/bin/basic_noram.rom  >> roms/twilighte_card_v05/6502/orix.rom
+#	cat kernel/kernel.rom >> roms/twilighte_card_v05/6502/orix.rom
+	echo Generating for Twilighte card 7 banks root sd
+	cat src/empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	#cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat basic/bin/basic_noram.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
+
+twilightecard_64KB_blocks_29F040:
+	cat ../empty-rom32/emptyrom8.rom > roms/twilighte_card_v05/6502/empty.r64
+	cat ../empty-rom32/emptyrom9.rom >> roms/twilighte_card_v05/6502/empty.r64
+	cat ../empty-rom32/emptyrom10.rom >> roms/twilighte_card_v05/6502/empty.r64
+	cat ../empty-rom32/emptyrom11.rom >> roms/twilighte_card_v05/6502/empty.r64
+
+twilightecard_firmware1:
+	echo Generating for Twilighte card 8 banks root sd
+	# 0
+	cat empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/orixsd.rom
+	# 1
+	cat empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	# 2
+	cat forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	# 3
+	cat monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	# 4
+	cat ../shell/shell.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	# 5
+	cat basicsd_noram.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	# 6
+	cat ../kernel/kernel.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	# 7
+	cat ca65.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
+	cat ../empty-rom32/emptyrom8.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom9.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom10.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom11.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
+	cat ../empty-rom32/emptyrom12.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom13.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom14.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom15.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom16.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom17.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom18.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom19.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom20.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom21.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom22.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom23.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom24.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom25.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom26.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom27.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom28.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom29.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom30.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom31.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat ../empty-rom32/emptyrom32.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+
+	cat ../empty-rom32/emptyrom10.rom > roms/twilighte_card_v05/6502/bankempty64.rom
+	cat ../empty-rom32/emptyrom10.rom >> roms/twilighte_card_v05/6502/bankempty64.rom
+	cat ../empty-rom32/emptyrom10.rom >> roms/twilighte_card_v05/6502/bankempty64.rom
+	cat ../empty-rom32/emptyrom10.rom >> roms/twilighte_card_v05/6502/bankempty64.rom
+	
+twilightecardnoacia:
+	echo Generating for Twilighte card no acia
+	cat empty-rom/empty-rom.rom > orixnoacia.rom
+	cat empty-rom/empty-rom.rom >> orixnoacia.rom
+	cat forth/build/cart/TeleForth.rom >> orixnoacia.rom
+	cat monitor/monitor.rom >> orixnoacia.rom
+	cat ../shell/shell.rom >> orixnoacia.rom
+	cat basic/bin/basic_noram.rom  >> orixnoacia.rom
+	cat ../kernel/kernelnoaciatwil.rom >> orixnoacia.rom
 
 test:
 	cp README.md roms/
