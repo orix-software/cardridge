@@ -14,6 +14,7 @@ empty_rom_git=https://github.com/orix-software/empty-rom.git
 monitor_git=https://github.com/orix-software/monitor.git
 forth_git=https://github.com/orix-software/forth.git
 basic_git=https://github.com/orix-software/basic.git
+md2hlp_git=https://github.com/assinie/md2hlp.git
 
 TELESTRAT_FOLDER=telestrat
 
@@ -25,6 +26,8 @@ LIST="empty-rom shell basic orix monitor forth"
 clean:
 	rm -rf src/*
 init:
+	@mkdir -p src/
+	@export MAKE=make
 	@echo Update kernel
 	@if [ -d "src/kernel" ]; then cd src/kernel && git pull && cd ../../ ; else cd src && git clone https://github.com/orix-software/kernel.git --recursive -b ${BRANCH}; fi 
 	@echo Update shell
@@ -34,17 +37,13 @@ init:
 	@echo Update monitor
 	@if [ -d "src/monitor" ]; then  cd src/monitor  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(monitor_git)  && cd ..;fi 	
 	@echo Update forth
-	@if [ -d "src/forth" ]; then  cd src/monitor  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(forth_git)  && cd ..;fi 		
+	@if [ -d "src/forth" ]; then  cd src/forth  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(forth_git)  && cd ..;fi 		
 	@echo Update basic
-	@if [ -d "src/basic" ]; then  cd src/monitor  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(basic_git)  && cd ..;fi 			
-	#rm -rf empty-rom
-	#rm -rf basic
-	#rm -rf orix
-	#rm -rf monitor
-	#rm -rf forth
-	#rm -rf md2hlp
-	#rm -rf buildTestAndRelease
-	#rm -rf ${HOMEDIRBIN}
+	@if [ -d "src/basic" ]; then  cd src/basic  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(basic_git)  && cd ..;fi 			
+	@echo Update md2hlp
+	@if [ -d "src/md2hlp" ]; then  cd src/md2hlp  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(md2hlp_git)  && cd ..;fi 				
+	@mkdir src/forth/md2hlp/src -p
+	@cp src/md2hlp/src/* src/forth/md2hlp/src
 	mkdir -p roms/oricutron/6502/
 	mkdir -p roms/oricutron/65c02/
 	mkdir -p roms/telestrat/6502/
@@ -73,6 +72,14 @@ build:
 	@echo "#    Building Monitor    #"
 	@echo "##########################"	
 	@cd src/monitor && make
+	@echo "##########################"
+	@echo "#    Building Forth      #"
+	@echo "##########################"	
+	@cd src/forth && make configure && make	
+	@echo "##########################"
+	@echo "#    Building Basic      #"
+	@echo "##########################"	
+	#@cd src/basic && ./configure && make
 	#@cd forth && make configure && make && make
 telestratcardridge:	
 	@echo "###################################"
