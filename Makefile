@@ -33,7 +33,7 @@ init:
 	@echo Update shell
 	@if [ -d "src/shell" ]; then  cd src/shell && rm -f src/build.inc && git pull && git submodule init && git submodule update --recursive --remote && cd ../../; else cd src && git clone https://github.com/orix-software/shell.git --recursive -b ${BRANCH}; fi 
 	@echo Update empty-rom
-	@if [ -d "src/empty-rom" ]; then  cd src/empty-rom  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(empty_rom_git)  && cd ..;fi 
+	@if [ -d "src/empty-rom" ]; then  cd src/empty-rom  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(empty_rom_git) -b ${BRANCH} && cd ..;fi 
 	@echo Update monitor
 	@if [ -d "src/monitor" ]; then  cd src/monitor  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(monitor_git)  && cd ..;fi 	
 	@echo Update forth
@@ -44,6 +44,7 @@ init:
 	@if [ -d "src/md2hlp" ]; then  cd src/md2hlp  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(md2hlp_git)  && cd ..;fi 				
 	@mkdir src/forth/md2hlp/src -p
 	@cp src/md2hlp/src/* src/forth/md2hlp/src
+	@dos2unix src/forth/md2hlp/src/
 	@cp src/md2hlp/src/md2hlp.py3 src/forth/md2hlp/src/md2hlp.py
 	mkdir -p roms/oricutron/6502/
 	mkdir -p roms/oricutron/65c02/
@@ -80,7 +81,7 @@ build:
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
-	#@cd src/basic && ./configure && make
+	@cd src/basic && cd src/ && dos2unux * && cd .. && ./configure && make
 	#@cd forth && make configure && make && make
 telestratcardridge:	
 	@echo "###################################"
@@ -124,6 +125,7 @@ twilightecard:
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat basic/bin/basic_noram.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
+	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
 
 twilightecard_64KB_blocks_29F040:
 	cat ../empty-rom32/emptyrom8.rom > roms/twilighte_card_v05/6502/empty.r64

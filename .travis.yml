@@ -2,6 +2,8 @@ language: c
 before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq git
+    - sudo apt-get install -qq xa65    
+    - sudo apt-get install -qq dos2unix    
     - sudo pip install --upgrade pip
     - sudo pip install mkdocs
     - git clone https://github.com/oric-software/buildTestAndRelease.git
