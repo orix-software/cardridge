@@ -44,8 +44,8 @@ init:
 	@if [ -d "src/md2hlp" ]; then  cd src/md2hlp  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(md2hlp_git)  && cd ..;fi 				
 	@mkdir src/forth/md2hlp/src -p
 	@cp src/md2hlp/src/* src/forth/md2hlp/src
-	@dos2unix src/forth/md2hlp/src/
 	@cp src/md2hlp/src/md2hlp.py3 src/forth/md2hlp/src/md2hlp.py
+	@cd src/forth/md2hlp/src/ && dos2unix *	
 	mkdir -p roms/oricutron/6502/
 	mkdir -p roms/oricutron/65c02/
 	mkdir -p roms/telestrat/6502/
@@ -75,13 +75,15 @@ build:
 	@echo "##########################"	
 	@cd src/monitor && make
 	@echo "##########################"
-	@echo "#    Building Forth      #"
-	@echo "##########################"	
-	@cd src/forth && make configure && make	
-	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
-	@cd src/basic && cd src/ && dos2unux * && cd .. && ./configure && make
+	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make	
+	@echo "##########################"
+	@echo "#    Building Forth      #"
+	@echo "##########################"
+	@cd src/forth/md2hlp/src/ && dos2unix *			
+	@cd src/forth && make configure && make	
+
 	#@cd forth && make configure && make && make
 telestratcardridge:	
 	@echo "###################################"
@@ -123,7 +125,7 @@ twilightecard:
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat basic/bin/basic_noram.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/basic/build/cart/basic_noram.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
 
