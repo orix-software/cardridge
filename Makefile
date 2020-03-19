@@ -44,6 +44,7 @@ init:
 	@if [ -d "src/md2hlp" ]; then  cd src/md2hlp  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(md2hlp_git)  && cd ..;fi 				
 	@mkdir src/forth/md2hlp/src -p
 	@cp src/md2hlp/src/* src/forth/md2hlp/src
+	@cp src/md2hlp/src/md2hlp.py3 src/forth/md2hlp/src/md2hlp.py
 	mkdir -p roms/oricutron/6502/
 	mkdir -p roms/oricutron/65c02/
 	mkdir -p roms/telestrat/6502/
