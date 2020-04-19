@@ -7,7 +7,7 @@ ORIX_ROM=roms
 BRANCH=2020.1
 
 
-all : init build twilightecard telestratcardridge
+all : init build twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge 
 .PHONY : all
 
 empty_rom_git=https://github.com/orix-software/empty-rom.git
@@ -151,13 +151,33 @@ twilightecard:
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+twilightecardorixcfgkernel:
+	@echo "###################################################"
+	@echo "#    Build .r64 orixcfg (kernel, basic11 & shell )#"
+	@echo "###################################################"	
+
+	cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
+	cat src/basic/build/cart/basicsd_noram.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
+	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+
+twilightecardorixcfgforthetc:
+	@echo "###################################################"
+	@echo "#    Build .r64 orixcfg forth                     #"
+	@echo "###################################################"	
+
+	cat src/empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/bank4321.r64
+	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 
 
-twilightecard_64KB_blocks_29F040:
-	cat ../empty-rom32/emptyrom8.rom > roms/twilighte_card_v05/6502/empty.r64
-	cat ../empty-rom32/emptyrom9.rom >> roms/twilighte_card_v05/6502/empty.r64
-	cat ../empty-rom32/emptyrom10.rom >> roms/twilighte_card_v05/6502/empty.r64
-	cat ../empty-rom32/emptyrom11.rom >> roms/twilighte_card_v05/6502/empty.r64
+
+#twilightecard_64KB_blocks_29F040:
+	#cat ../empty-rom32/emptyrom8.rom  > roms/twilighte_card_v05/6502/empty.r64
+	#cat ../empty-rom32/emptyrom9.rom >> roms/twilighte_card_v05/6502/empty.r64
+	#cat ../empty-rom32/emptyrom10.rom >> roms/twilighte_card_v05/6502/empty.r64
+	#cat ../empty-rom32/emptyrom11.rom >> roms/twilighte_card_v05/6502/empty.r64
 
 twilightecard_firmware1:
 	echo Generating for Twilighte card 8 banks root sd
