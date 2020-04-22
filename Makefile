@@ -7,7 +7,7 @@ ORIX_ROM=roms
 BRANCH=2020.1
 
 
-all : init build twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge 
+all : init build twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  twilightecardorixstandalonerom
 .PHONY : all
 
 empty_rom_git=https://github.com/orix-software/empty-rom.git
@@ -170,6 +170,15 @@ twilightecardorixcfgforthetc:
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+
+twilightecardorixstandalonerom:
+	@echo "###################################################"
+	@echo "#    Build .rom standalone                     #"
+	@echo "###################################################"	
+
+	cp src/empty-rom/empty-rom.rom roms/twilighte_card_v05/6502/empty.rom
+	cp src/forth/build/cart/TeleForth.rom  roms/twilighte_card_v05/6502/
+	cp src/monitor/monitor.rom roms/twilighte_card_v05/6502/
 
 
 
