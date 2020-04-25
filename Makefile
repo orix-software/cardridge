@@ -4,7 +4,7 @@ CFLAGS=-ttelestrat
 LDFILES=
 ASCA65=ca65
 ORIX_ROM=roms
-BRANCH=2020.1
+BRANCH=master
 
 
 all : init build twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  twilightecardorixstandalonerom
@@ -21,6 +21,15 @@ TELESTRAT_FOLDER=telestrat
 HOMEDIRBIN=compiledir/
 
 INITIAL_FOLDER=`pwd`
+
+ifdef $(TRAVIS_BRANCH)
+ifneq ($(TRAVIS_BRANCH), master)
+RELEASE=alpha
+else
+RELEASE:=$(shell cat VERSION)
+endif
+endif
+
 
 LIST="empty-rom shell basic orix monitor forth"
 clean:
