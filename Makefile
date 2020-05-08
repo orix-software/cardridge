@@ -22,7 +22,7 @@ HOMEDIRBIN=compiledir/
 
 INITIAL_FOLDER=`pwd`
 
-ifdef $(TRAVIS_BRANCH)
+ifdef TRAVIS_BRANCH
 ifneq ($(TRAVIS_BRANCH), master)
 RELEASE=alpha
 else
@@ -61,6 +61,7 @@ init:
 	mkdir -p roms/telestrat/65c02/
 	mkdir -p roms/twilighte_card_v05/6502/		
 	mkdir -p roms/twilighte_card_v05/65c02/	
+	mkdir -p build/usr/share/carts/
   
 build:
 	#git clone	https://github.com/oric-software/buildTestAndRelease.git
@@ -102,7 +103,7 @@ telestratcardridge:
 	echo Generating for telestrat First cardridge
 	cat empty-rom/empty-rom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat shell/shell.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat basic/bin/basic_noram.rom  >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat basic/bin/basicsdrom  >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat orix/build/usr/share/orix-1/6502/kernel.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	echo Generating for telestrat Second cardridge
 	cat forth/forth.rom > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
@@ -166,9 +167,10 @@ twilightecardorixcfgkernel:
 	@echo "###################################################"	
 
 	cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
-	cat src/basic/build/cart/basicsd_noram.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
+	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/`cat VERSION`/
 
 twilightecardorixcfgforthetc:
 	@echo "###################################################"
@@ -179,6 +181,7 @@ twilightecardorixcfgforthetc:
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/`cat VERSION`/fmee.r64
 
 twilightecardorixstandalonerom:
 	@echo "###################################################"
@@ -257,11 +260,8 @@ twilightecardnoacia:
 	cat ../kernel/kernelnoaciatwil.rom >> orixnoacia.rom
 
 test:
-	cp README.md roms/
-	cd roms && tar -c * > ../roms.tar &&	cd ..
-	filepack roms.tar roms.pkg
+	cd build && tar -c * > ../carts.tar &&	cd ..
 	gzip roms.tar
-	mv roms.tar.gz $(ORIX_ROM).tgz
-	php buildTestAndRelease/publish/publish2repo.php $(ORIX_ROM).pkg ${hash} 6502 pkg alpha
-	php buildTestAndRelease/publish/publish2repo.php $(ORIX_ROM).tgz ${hash} 6502 tgz alpha
+	mv roms.tar.gz carts.tgz
+	php buildTestAndRelease/publish/publish2repo.php carts.tgz ${hash} 6502 tgz $(RELEASE)
 
