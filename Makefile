@@ -5,6 +5,7 @@ LDFILES=
 ASCA65=ca65
 ORIX_ROM=roms
 BRANCH=master
+VERSION=2020.2
 
 
 all : init buildme twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  twilightecardorixstandalonerom
@@ -87,7 +88,7 @@ buildme:
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
-	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG=\'BASIC\ 1.1\ SD\ v2020.1\'
+	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2020.1"' JOYSTICK_DRIVER=YES
 	@echo "##########################"
 	@echo "#    Building Forth      #"
 	@echo "##########################"
@@ -170,7 +171,7 @@ twilightecardorixcfgkernel:
 	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
-	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/2020.1/
+	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/$(VERSION)/
 
 twilightecardorixcfgforthetc:
 	@echo "###################################################"
