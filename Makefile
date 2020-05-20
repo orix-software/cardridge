@@ -130,6 +130,17 @@ twilightecard:
 #	cat basic/bin/basic_noram.rom  >> roms/twilighte_card_v05/6502/orix.rom
 #	cat kernel/kernel.rom >> roms/twilighte_card_v05/6502/orix.rom
 	echo Generating for Twilighte card 7 banks root sd
+	#cp   src/empty-rom/emptyrom.rom /usr/share/emptyrom/2020.1/
+	#cp   src/forth/build/cart/TeleForth.rom /usr/share/forth/2020.1/forth.rom
+	#cp   src/shell/shellsd.rom /usr/share/shellsd/2020.2/
+	#cp   src/shell/kernelsd.rom /usr/share/kernelsd/2020.2/
+	#echo "Emptyrom 2020.1;/usr/share/emptyrom/2020.1/emptyrom.rom" > build/etc/orixcfg/roms.cnf
+	#echo "Kernelsd 2020.2;/usr/share/kernel/2020.2/kernelsd.rom" >> build/etc/orixcfg/roms.cnf
+	#echo "Shell 2020.2;/usr/share/shell/2020.2/shellsd.rom" >> build/etc/orixcfg/roms.cnf
+	#echo "Monitor 2020.1;/usr/share/monitor/2020.1/monitor.rom" >> build/etc/orixcfg/roms.cnf
+	#echo "Forth 2020.1;/usr/share/forth/2020.1/forth.rom" >> build/etc/orixcfg/roms.cnf
+	#echo "Basicsdjoy 2020.1;/usr/share/basic11/2020.1/basicsd.rom" >> build/etc/orixcfg/roms.cnf
+
 	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -173,17 +184,21 @@ twilightecardorixcfgkernel:
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/$(VERSION)/
 
+
 twilightecardorixcfgforthetc:
 	@echo "###################################################"
 	@echo "#    Build .r64 orixcfg forth                     #"
 	@echo "###################################################"	
 
-	cat comal.rom > roms/twilighte_card_v05/6502/bank4321.r64
-	cat focal.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/bank4321.r64
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
-	mkdir build/usr/share/carts/`cat VERSION`/ -p
-	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/`cat VERSION`/fmfc.r64
+	mkdir build/usr/share/carts/$(VERSION)/ -p
+	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/$(VERSION)/fmee.r64
+	echo "Monitor 2020.1-Forth 2020.1;/usr/share/carts/2020.1/mfee.r64" > build/etc/orixcfg/carts.cnf
+
+
 
 twilightecardorixstandalonerom:
 	@echo "###################################################"
