@@ -102,15 +102,15 @@ telestratcardridge:
 	@echo "###################################"	
 
 	echo Generating for telestrat First cardridge
-	cat empty-rom/emptyrom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat shell/shell.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat basic/bin/basicsdrom  >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat orix/build/usr/share/orix-1/6502/kernel.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat src/empty-rom/emptyrom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat src/shell/shellsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat src/basic/build/cart/basicsd.rom   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat src/kernel/kernelsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	echo Generating for telestrat Second cardridge
-	cat forth/forth.rom > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat src/forth/build/cart/TeleForth.rom > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat src/monitor/monitor.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
-	cat empty-rom/emptyrom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
-	cat empty-rom/emptyrom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat src/empty-rom/emptyrom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat src/empty-rom/emptyrom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	
 	
 	
