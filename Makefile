@@ -7,7 +7,7 @@ ORIX_ROM=roms
 BRANCH=master
 
 
-all : init build twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  twilightecardorixstandalonerom
+all : init buildme twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  twilightecardorixstandalonerom
 .PHONY : all
 
 empty_rom_git=https://github.com/orix-software/empty-rom.git
@@ -63,7 +63,7 @@ init:
 	mkdir -p roms/twilighte_card_v05/65c02/	
 	mkdir -p build/usr/share/carts/
   
-build:
+buildme:
 	#git clone	https://github.com/oric-software/buildTestAndRelease.git
 	#git clone   https://github.com/assinie/md2hlp.git
 
@@ -170,18 +170,19 @@ twilightecardorixcfgkernel:
 	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
-	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/`cat VERSION`/
+	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/2020.1/
 
 twilightecardorixcfgforthetc:
 	@echo "###################################################"
 	@echo "#    Build .r64 orixcfg forth                     #"
 	@echo "###################################################"	
 
-	cat src/empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/bank4321.r64
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+	cat comal.rom > roms/twilighte_card_v05/6502/bank4321.r64
+	cat focal.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
-	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/`cat VERSION`/fmee.r64
+	mkdir build/usr/share/carts/`cat VERSION`/ -p
+	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/`cat VERSION`/fmfc.r64
 
 twilightecardorixstandalonerom:
 	@echo "###################################################"
