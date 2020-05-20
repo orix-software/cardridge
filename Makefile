@@ -8,7 +8,7 @@ BRANCH=master
 VERSION=2020.2
 
 
-all : init buildme twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  twilightecardorixstandalonerom
+all : init buildme twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  
 .PHONY : all
 
 empty_rom_git=https://github.com/orix-software/empty-rom.git
