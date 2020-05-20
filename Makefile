@@ -102,15 +102,15 @@ telestratcardridge:
 	@echo "###################################"	
 
 	echo Generating for telestrat First cardridge
-	cat empty-rom/empty-rom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat empty-rom/emptyrom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat shell/shell.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat basic/bin/basicsdrom  >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat orix/build/usr/share/orix-1/6502/kernel.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	echo Generating for telestrat Second cardridge
 	cat forth/forth.rom > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat src/monitor/monitor.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
-	cat empty-rom/empty-rom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
-	cat empty-rom/empty-rom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat empty-rom/emptyrom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat empty-rom/emptyrom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	
 	
 	
@@ -122,46 +122,46 @@ twilightecard:
 	@echo "###################################"	
 
 #	echo Generating for Twilighte card 7 banks root usbkey
-#	cat empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/orix.rom
-#	cat empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orix.rom
+#	cat empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/orix.rom
+#	cat empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orix.rom
 #	cat forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orix.rom
 #	cat monitor/monitor.rom >> roms/twilighte_card_v05/6502/orix.rom
 #	cat shell/shell.rom >> roms/twilighte_card_v05/6502/orix.rom
 #	cat basic/bin/basic_noram.rom  >> roms/twilighte_card_v05/6502/orix.rom
 #	cat kernel/kernel.rom >> roms/twilighte_card_v05/6502/orix.rom
 	echo Generating for Twilighte card 7 banks root sd
-	cat src/empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/basic/build/cart/basicsd_noram.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 twilightecardorixcfgkernel:
 	@echo "###################################################"
 	@echo "#    Build .r64 orixcfg (kernel, basic11 & shell )#"
@@ -170,7 +170,7 @@ twilightecardorixcfgkernel:
 	cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
-	cat src/empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/$(VERSION)/
 
 twilightecardorixcfgforthetc:
@@ -190,7 +190,7 @@ twilightecardorixstandalonerom:
 	@echo "#    Build .rom standalone                     #"
 	@echo "###################################################"	
 
-	cp src/empty-rom/empty-rom.rom roms/twilighte_card_v05/6502/empty.rom
+	cp src/empty-rom/emptyrom.rom roms/twilighte_card_v05/6502/empty.rom
 	cp src/forth/build/cart/TeleForth.rom  roms/twilighte_card_v05/6502/
 	cp src/monitor/monitor.rom roms/twilighte_card_v05/6502/
 
@@ -205,9 +205,9 @@ twilightecardorixstandalonerom:
 twilightecard_firmware1:
 	echo Generating for Twilighte card 8 banks root sd
 	# 0
-	cat empty-rom/empty-rom.rom > roms/twilighte_card_v05/6502/orixsd.rom
+	cat empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/orixsd.rom
 	# 1
-	cat empty-rom/empty-rom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	# 2
 	cat forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	# 3
@@ -253,8 +253,8 @@ twilightecard_firmware1:
 	
 twilightecardnoacia:
 	echo Generating for Twilighte card no acia
-	cat empty-rom/empty-rom.rom > orixnoacia.rom
-	cat empty-rom/empty-rom.rom >> orixnoacia.rom
+	cat empty-rom/emptyrom.rom > orixnoacia.rom
+	cat empty-rom/emptyrom.rom >> orixnoacia.rom
 	cat forth/build/cart/TeleForth.rom >> orixnoacia.rom
 	cat monitor/monitor.rom >> orixnoacia.rom
 	cat ../shell/shell.rom >> orixnoacia.rom
