@@ -283,6 +283,6 @@ twilightecardnoacia:
 test:
 	cd build && tar -c * > ../carts.tar &&	cd ..
 	gzip carts.tar
-	#mv roms.tar.gz carts.tgz
+	mv carts.tar.gz carts.tgz
 	php buildTestAndRelease/publish/publish2repo.php carts.tgz ${hash} 6502 tgz $(RELEASE)
 
