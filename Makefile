@@ -183,6 +183,8 @@ twilightecardorixcfgkernel:
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	mkdir build/usr/share/carts/$(VERSION)/ -p
+	mkdir -p build/etc/orixcfg/
+	echo "Kernelsd, basic11sd, shellsd;/usr/share/carts/$(VERSION)/kernelsd.r64" > build/etc/orixcfg/carts.cnf
 	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/$(VERSION)/
 
 
@@ -196,8 +198,9 @@ twilightecardorixcfgforthetc:
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	mkdir build/usr/share/carts/$(VERSION)/ -p
+	mkdir -p build/etc/orixcfg/
 	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/$(VERSION)/fmee.r64
-	echo "Monitor 2020.1-Forth 2020.1;/usr/share/carts/2020.1/mfee.r64" > build/etc/orixcfg/carts.cnf
+	echo "Monitor 2020.1-Forth 2020.1;/usr/share/carts/2020.1/mfee.r64" >> build/etc/orixcfg/carts.cnf
 
 
 
