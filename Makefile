@@ -182,6 +182,7 @@ twilightecardorixcfgkernel:
 	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	mkdir build/usr/share/carts/$(VERSION)/ -p
 	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/$(VERSION)/
 
 
