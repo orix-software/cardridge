@@ -135,7 +135,7 @@ twilightecard:
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/basic/build/cart/basicsd_noram.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -215,7 +215,7 @@ twilightecard_firmware1:
 	# 4
 	cat ../shell/shell.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	# 5
-	cat basicsd_noram.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat basicsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	# 6
 	cat ../kernel/kernel.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	# 7
