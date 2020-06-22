@@ -88,7 +88,7 @@ buildme:
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
-	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2020.1"' JOYSTICK_DRIVER=YES
+	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2020.1"' JOYSTICK=YES
 	@echo "##########################"
 	@echo "#    Building Forth      #"
 	@echo "##########################"
@@ -187,19 +187,18 @@ twilightecardorixcfgkernel:
 	echo "Kernelsd, basic11sd, shellsd;/usr/share/carts/$(VERSION)/kernelsd.r64" > build/etc/orixcfg/carts.cnf
 	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/$(VERSION)/
 
-
 twilightecardorixcfgforthetc:
 	@echo "###################################################"
 	@echo "#    Build .r64 orixcfg forth                     #"
 	@echo "###################################################"	
 
 	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/bank4321.r64
-	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	mkdir build/usr/share/carts/$(VERSION)/ -p
 	mkdir -p build/etc/orixcfg/
-	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/$(VERSION)/fmee.r64
+	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/$(VERSION)/mfee.r64
 	echo "Monitor 2020.1-Forth 2020.1;/usr/share/carts/2020.1/mfee.r64" >> build/etc/orixcfg/carts.cnf
 
 
