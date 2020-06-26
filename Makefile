@@ -88,7 +88,9 @@ buildme:
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
-	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2020.1"' JOYSTICK=YES
+	#@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2020.1"' JOYSTICK=YES
+	mkdir basic_build && wget http://repo.orix.oric.org/dists/official/tgz/6502/basic.tgz && tar xvfz basic.tgz && basic/usr/share/*/*.rom ../
+	
 	@echo "##########################"
 	@echo "#    Building Forth      #"
 	@echo "##########################"
@@ -104,7 +106,7 @@ telestratcardridge:
 	echo Generating for telestrat First cardridge
 	cat src/empty-rom/emptyrom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat src/shell/shellsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat src/basic/build/cart/basicsd.rom   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat basicsd.rom   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat src/kernel/kernelsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	echo Generating for telestrat Second cardridge
 	cat src/forth/build/cart/TeleForth.rom > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
@@ -146,7 +148,7 @@ twilightecard:
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat basicsd.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -179,7 +181,7 @@ twilightecardorixcfgkernel:
 	@echo "###################################################"	
 
 	cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
-	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
+	cat basicsd.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	mkdir build/usr/share/carts/$(VERSION)/ -p
