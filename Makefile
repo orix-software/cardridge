@@ -88,8 +88,9 @@ buildme:
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
-	#@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2020.1"' JOYSTICK=YES
-	wget http://repo.orix.oric.org/dists/official/tgz/6502/basic.tgz && tar xvfz basic.tgz && ls&& cp usr/share/basic/*/*.rom .
+	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2020.3"' JOYSTICK=YES && cd ..
+	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=usb COPYRIGHT_MSG='"BASIC 1.1 USB/JOY v2020.3"' JOYSTICK=YES && cd ..
+	#wget http://repo.orix.oric.org/dists/official/tgz/6502/basic.tgz && tar xvfz basic.tgz && ls&& cp usr/share/basic/*/*.rom .
 	
 	@echo "##########################"
 	@echo "#    Building Forth      #"
