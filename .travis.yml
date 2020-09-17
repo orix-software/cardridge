@@ -8,5 +8,7 @@ before_install:
     - sudo pip install mkdocs
     - git clone https://github.com/oric-software/buildTestAndRelease.git
     - cd buildTestAndRelease/ && cd osdk/ && unzip osdk_src.zip && cd osdk_src/osdk/main/common/ && make && cd ../filepack/ && make && cp filepack /home/travis/bin/ && chmod +x /home/travis/bin//filepack && cd ../../../../../../
+    - git clone https://github.com/cc65/cc65.git && cd cc65 && make && make install PREFIX=/home/travis/ && cd ..
+
 
 
