@@ -164,7 +164,7 @@ twilightecard:
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/shell/shell.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/basic/bin/basicusb.rom  >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/orixusb.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
@@ -200,13 +200,22 @@ twilightecardorixcfgkernel:
 	@echo "###################################################"	
 
 	cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
-	cat basicsd.rom  >> roms/twilighte_card_v05/6502/kernelsd.r64
+	cat src/basic/bin/basicsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+
+	cat src/shell/shell.rom > roms/twilighte_card_v05/6502/kernelus.r64
+	cat src/basic/bin/basicusb.rom >> roms/twilighte_card_v05/6502/kernelus.r64
+	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/kernelus.r64
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelus.r64
+	
+
 	mkdir build/usr/share/carts/$(VERSION)/ -p
 	mkdir -p build/etc/orixcfg/
 	echo "Kernelsd, basic11sd, shellsd;/usr/share/carts/$(VERSION)/kernelsd.r64" > build/etc/orixcfg/carts.cnf
+	echo "Kernelus, basic11us, shellus;/usr/share/carts/$(VERSION)/kernelus.r64" > build/etc/orixcfg/carts.cnf
 	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/$(VERSION)/
+	cp roms/twilighte_card_v05/6502/kernelus.r64 build/usr/share/carts/$(VERSION)/
 
 twilightecardorixcfgforthetc:
 	@echo "###################################################"
