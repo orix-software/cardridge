@@ -7,7 +7,6 @@ before_install:
     - sudo pip install --upgrade pip
     - sudo pip install mkdocs
     - git clone https://github.com/oric-software/buildTestAndRelease.git
-    HOMEDIRBIN=
     - cd buildTestAndRelease/ && cd osdk/ && unzip osdk_src.zip && cd osdk_src/osdk/main/common/ && make && cd ../filepack/ && make && cp filepack /home/travis/bin/ && chmod +x /home/travis/bin//filepack && cd ../../../../../../
 
 
