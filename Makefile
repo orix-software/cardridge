@@ -107,7 +107,7 @@ telestratcardridge:
 	echo Generating for telestrat First cardridge
 	cat src/empty-rom/emptyrom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat src/shell/shellsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat basicsd.rom   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat src/basic/bin/basicsd.rom   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat src/kernel/kernelsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	echo Generating for telestrat Second cardridge
 	cat src/forth/build/cart/TeleForth.rom > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
