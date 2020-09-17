@@ -123,33 +123,13 @@ twilightecard:
 	@echo "###################################"
 	@echo "#    Build Twilighte board ROM    #"
 	@echo "###################################"	
-
-#	echo Generating for Twilighte card 7 banks root usbkey
-#	cat empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/orix.rom
-#	cat empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orix.rom
-#	cat forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orix.rom
-#	cat monitor/monitor.rom >> roms/twilighte_card_v05/6502/orix.rom
-#	cat shell/shell.rom >> roms/twilighte_card_v05/6502/orix.rom
-#	cat basic/bin/basic_noram.rom  >> roms/twilighte_card_v05/6502/orix.rom
-#	cat kernel/kernel.rom >> roms/twilighte_card_v05/6502/orix.rom
 	echo Generating for Twilighte card 7 banks root sd
-	#cp   src/empty-rom/emptyrom.rom /usr/share/emptyrom/2020.1/
-	#cp   src/forth/build/cart/TeleForth.rom /usr/share/forth/2020.1/forth.rom
-	#cp   src/shell/shellsd.rom /usr/share/shellsd/2020.2/
-	#cp   src/shell/kernelsd.rom /usr/share/kernelsd/2020.2/
-	#echo "Emptyrom 2020.1;/usr/share/emptyrom/2020.1/emptyrom.rom" > build/etc/orixcfg/roms.cnf
-	#echo "Kernelsd 2020.2;/usr/share/kernel/2020.2/kernelsd.rom" >> build/etc/orixcfg/roms.cnf
-	#echo "Shell 2020.2;/usr/share/shell/2020.2/shellsd.rom" >> build/etc/orixcfg/roms.cnf
-	#echo "Monitor 2020.1;/usr/share/monitor/2020.1/monitor.rom" >> build/etc/orixcfg/roms.cnf
-	#echo "Forth 2020.1;/usr/share/forth/2020.1/forth.rom" >> build/etc/orixcfg/roms.cnf
-	#echo "Basicsdjoy 2020.1;/usr/share/basic11/2020.1/basicsd.rom" >> build/etc/orixcfg/roms.cnf
-
 	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat basicsd.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/basic/bin/basicsd.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -176,6 +156,44 @@ twilightecard:
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	@echo "##############################################"
+	@echo "#    Build Twilighte board ROM  USB DEFAULT  #"
+	@echo "##############################################"	
+	echo Generating for Twilighte card 7 banks root usb
+	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/basic/bin/basicusb.rom  >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/orixusb.rom	
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom	
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+
+
 twilightecardorixcfgkernel:
 	@echo "###################################################"
 	@echo "#    Build .r64 orixcfg (kernel, basic11 & shell )#"
