@@ -107,7 +107,7 @@ telestratcardridge:
 	echo Generating for telestrat First cardridge
 	cat src/empty-rom/emptyrom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat src/shell/shellsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat src/basic/bin/basicsd.rom   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat src/basic/build/cart/basicsd.rom   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat src/kernel/kernelsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	echo Generating for telestrat Second cardridge
 	cat src/forth/build/cart/TeleForth.rom > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
@@ -129,7 +129,7 @@ twilightecard:
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/basic/bin/basicsd.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -165,7 +165,7 @@ twilightecard:
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/shell/shell.rom >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat src/basic/bin/basicusb.rom  >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/basic/build/cart/basicusb.rom  >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/orixusb.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
@@ -200,12 +200,12 @@ twilightecardorixcfgkernel:
 	@echo "###################################################"	
 
 	cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
-	cat src/basic/bin/basicsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	cat src/basic/build/cart//basicsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 
 	cat src/shell/shell.rom > roms/twilighte_card_v05/6502/kernelus.r64
-	cat src/basic/bin/basicusb.rom >> roms/twilighte_card_v05/6502/kernelus.r64
+	cat src/basic/build/cart/basicusb.rom >> roms/twilighte_card_v05/6502/kernelus.r64
 	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/kernelus.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelus.r64
 	
