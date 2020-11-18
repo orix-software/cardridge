@@ -129,7 +129,7 @@ twilightecard:
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/basic/build/cart/basicsd.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat src/basic/build/cart/basicsd2.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -165,7 +165,7 @@ twilightecard:
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/shell/shell.rom >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat src/basic/build/cart/basicusb.rom  >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat src/basic/build/cart/basicus2.rom  >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/orixusb.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
@@ -205,7 +205,7 @@ twilightecardorixcfgkernel:
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 
 	cat src/shell/shell.rom > roms/twilighte_card_v05/6502/kernelus.r64
-	cat src/basic/build/cart/basicusb.rom >> roms/twilighte_card_v05/6502/kernelus.r64
+	cat src/basic/build/cart/basicus2.rom >> roms/twilighte_card_v05/6502/kernelus.r64
 	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/kernelus.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelus.r64
 	
