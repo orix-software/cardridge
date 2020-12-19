@@ -5,7 +5,7 @@ LDFILES=
 ASCA65=ca65
 ORIX_ROM=roms
 BRANCH=master
-VERSION=2021.1
+
 
 
 all : init buildme twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  
@@ -26,8 +26,10 @@ INITIAL_FOLDER=`pwd`
 ifdef TRAVIS_BRANCH
 ifneq ($(TRAVIS_BRANCH), master)
 RELEASE=alpha
+VERSION=alpha
 else
 RELEASE:=$(shell cat VERSION)
+VERSION:=$(shell cat VERSION)
 endif
 endif
 
@@ -88,8 +90,8 @@ buildme:
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
-	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2020.3"' JOYSTICK=YES && cd ..
-	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=usb COPYRIGHT_MSG='"BASIC 1.1 USB/JOY v2020.3"' JOYSTICK=YES && cd ..
+	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2021.1"' JOYSTICK=YES && cd ..
+	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=usb COPYRIGHT_MSG='"BASIC 1.1 USB/JOY v2021.1"' JOYSTICK=YES && cd ..
 	#wget http://repo.orix.oric.org/dists/official/tgz/6502/basic.tgz && tar xvfz basic.tgz && ls&& cp usr/share/basic/*/*.rom .
 	
 	@echo "##########################"
@@ -228,6 +230,10 @@ twilightecardorixcfgforthetc:
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+	cp roms/twilighte_card_v05/6502/bank4321.r64  roms/twilighte_card_v05/6502/fullus.bk8
+	cp roms/twilighte_card_v05/6502/bank4321.r64  roms/twilighte_card_v05/6502/fullsd.bk8
+	cat roms/twilighte_card_v05/6502/kernelus.r64 >> roms/twilighte_card_v05/6502/fullus.bk8
+	cat roms/twilighte_card_v05/6502/kernelsd.r64 >> roms/twilighte_card_v05/6502/fullsd.bk8
 	mkdir build/usr/share/carts/$(VERSION)/ -p
 	mkdir -p build/etc/orixcfg/
 	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/$(VERSION)/mfee.r64
