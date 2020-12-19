@@ -5,7 +5,7 @@ LDFILES=
 ASCA65=ca65
 ORIX_ROM=roms
 BRANCH=master
-VERSION=2020.4
+VERSION=2021.1
 
 
 all : init buildme twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  
