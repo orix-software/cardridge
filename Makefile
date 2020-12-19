@@ -200,7 +200,9 @@ twilightecardorixcfgkernel:
 	@echo "###################################################"	
 
 	cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
-	cat src/basic/build/cart//basicsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	ls src/basic/build
+	ls src/basic/build/cart
+	cat src/basic/build/cart/basicsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 
