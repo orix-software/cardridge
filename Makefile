@@ -8,7 +8,7 @@ BRANCH=master
 
 
 
-all : init buildme twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge  
+all : init buildme twilightecard  twilightecardorixcfgkernel twilightecardorixcfgforthetc telestratcardridge   twilightecardorixemptyrom
 .PHONY : all
 
 empty_rom_git=https://github.com/orix-software/empty-rom.git
@@ -201,17 +201,22 @@ twilightecardorixcfgkernel:
 	@echo "#    Build .r64 orixcfg (kernel, basic11 & shell )#"
 	@echo "###################################################"	
 
+	@cat src/kernel/src>headerorixcfg.bin > kernelsd.roh
 	cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
 	ls src/basic/build
 	ls src/basic/build/cart
 	cat src/basic/build/cart/basicsd2.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	@cat roms/twilighte_card_v05/6502/kernelsd.r64 >> kernelsd.roh
+
 
 	cat src/shell/shell.rom > roms/twilighte_card_v05/6502/kernelus.r64
 	cat src/basic/build/cart/basicus2.rom >> roms/twilighte_card_v05/6502/kernelus.r64
 	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/kernelus.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelus.r64
+	@cat src/kernel/src>headerorixcfg.bin > kernelus.roh
+	@cat roms/twilighte_card_v05/6502/kernelus.r64 >> kernelus.roh
 	
 
 	mkdir build/usr/share/carts/$(VERSION)/ -p
@@ -220,6 +225,8 @@ twilightecardorixcfgkernel:
 	echo "Kernelus, basic11us, shellus;/usr/share/carts/$(VERSION)/kernelus.r64" > build/etc/orixcfg/carts.cnf
 	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/$(VERSION)/
 	cp roms/twilighte_card_v05/6502/kernelus.r64 build/usr/share/carts/$(VERSION)/
+	cp kernelus.roh build/usr/share/carts/$(VERSION)
+	cp kernelsd.roh build/usr/share/carts/$(VERSION)
 
 twilightecardorixcfgforthetc:
 	@echo "###################################################"
@@ -235,11 +242,20 @@ twilightecardorixcfgforthetc:
 	cat roms/twilighte_card_v05/6502/kernelus.r64 >> roms/twilighte_card_v05/6502/fullus.bk8
 	cat roms/twilighte_card_v05/6502/kernelsd.r64 >> roms/twilighte_card_v05/6502/fullsd.bk8
 	mkdir build/usr/share/carts/$(VERSION)/ -p
+
 	mkdir -p build/etc/orixcfg/
 	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/$(VERSION)/mfee.r64
 	echo "Monitor 2020.1-Forth 2020.1;/usr/share/carts/2020.1/mfee.r64" >> build/etc/orixcfg/carts.cnf
 
-
+twilightecardorixemptyrom:
+	@echo "###################################################"
+	@echo "#    Build .r64 empty rom .r64                    #"
+	@echo "###################################################"	
+	
+	cat src/empty-rom/emptyrom.rom > build/usr/share/carts/emptyset.r64
+	cat src/empty-rom/emptyrom.rom >> build/usr/share/carts/emptyset.r64
+	cat src/empty-rom/emptyrom.rom >> build/usr/share/carts/emptyset.r64
+	cat src/empty-rom/emptyrom.rom >> build/usr/share/carts/emptyset.r64
 
 twilightecardorixstandalonerom:
 	@echo "###################################################"
@@ -250,7 +266,9 @@ twilightecardorixstandalonerom:
 	cp src/forth/build/cart/TeleForth.rom  roms/twilighte_card_v05/6502/
 	cp src/monitor/monitor.rom roms/twilighte_card_v05/6502/
 
-
+	cp src/monitor/monitor.rom build/usr/share/roms/
+	cp src/forth/build/cart/TeleForth.rom build/usr/share/roms/
+	cat src/empty-rom/emptyrom.rom > build/usr/share/roms/empty.rom
 
 #twilightecard_64KB_blocks_29F040:
 	#cat ../empty-rom32/emptyrom8.rom  > roms/twilighte_card_v05/6502/empty.r64
