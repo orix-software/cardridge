@@ -72,7 +72,8 @@ init:
 	@mkdir src/forth/md2hlp/src -p
 	@cp src/md2hlp/src/* src/forth/md2hlp/src
 	@cp src/md2hlp/src/md2hlp.py3 src/forth/md2hlp/src/md2hlp.py
-	@cd src/forth/md2hlp/src/ && dos2unix *	
+	@cd src/forth/md2hlp/src/ 
+	#&& dos2unix *	
 	mkdir -p roms/oricutron/6502/
 	mkdir -p roms/oricutron/65c02/
 	mkdir -p roms/telestrat/6502/
