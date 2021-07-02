@@ -33,6 +33,10 @@ VERSION:=$(shell cat VERSION)
 endif
 endif
 
+PATH_BASIC11_USB=usr/share/basic11/basicus2.rom
+PATH_BASIC11_SD=usr/share/basic11/basicsd2.rom
+PATH_FORTH_ROM=usr/share/forth/2021.2/forth.rom
+PATH_SYSTEMD_ROM=usr/share/systemd/systemd.rom
 
 LIST="empty-rom shell basic orix monitor forth"
 clean:
@@ -49,9 +53,11 @@ init:
 	@echo Update monitor
 	@if [ -d "src/monitor" ]; then  cd src/monitor  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(monitor_git) -b ${BRANCH}  && cd ..;fi 	
 	@echo Update forth
-	@if [ -d "src/forth" ]; then  cd src/forth  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(forth_git) -b ${BRANCH}  && cd ..;fi 		
+	@curl http://repo.orix.oric.org/dists/official/tgz/6502/forth.tgz --output forth.tgz
+	@echo Update systemd
+	@curl http://repo.orix.oric.org/dists/official/tgz/6502/systemd.tgz --output systemd.tgz
 	@echo Update basic
-	@if [ -d "src/basic" ]; then  cd src/basic  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(basic_git)  && cd ..;fi 			
+	@curl http://repo.orix.oric.org/dists/official/tgz/6502/basic.tgz --output basic.tgz
 	@echo Update md2hlp
 	@if [ -d "src/md2hlp" ]; then  cd src/md2hlp  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(md2hlp_git)  && cd ..;fi 				
 	@mkdir src/forth/md2hlp/src -p
@@ -67,9 +73,6 @@ init:
 	mkdir -p build/usr/share/carts/
   
 buildme:
-	#git clone	https://github.com/oric-software/buildTestAndRelease.git
-	#git clone   https://github.com/assinie/md2hlp.git
-
 
 	@echo "##########################"
 	@echo "#    Building Shell      #"
@@ -90,15 +93,21 @@ buildme:
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
-	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=sdcard COPYRIGHT_MSG='"BASIC 1.1 SD/JOY v2021.1"' JOYSTICK=YES && cd ..
-	@cd src/basic && cd src/ && dos2unix * && cd .. && ./configure && make USB_MODE=usb COPYRIGHT_MSG='"BASIC 1.1 USB/JOY v2021.1"' JOYSTICK=YES && cd ..
-	#wget http://repo.orix.oric.org/dists/official/tgz/6502/basic.tgz && tar xvfz basic.tgz && ls&& cp usr/share/basic/*/*.rom .
+	@gzip -dc basic.tgz | tar -tf -
+
 	
 	@echo "##########################"
 	@echo "#    Building Forth      #"
 	@echo "##########################"
-	@cd src/forth/md2hlp/src/ && dos2unix *			
-	@cd src/forth && make configure && make	
+	@gzip -dc forth.tgz | tar -tf -
+	
+	@echo "##########################"
+	@echo "#    Building Systemd    #"
+	@echo "##########################"
+	@gzip -dc systemd.tgz | tar -tf -
+	
+	
+
 
 	#@cd forth && make configure && make && make
 telestratcardridge:	
@@ -109,10 +118,10 @@ telestratcardridge:
 	echo Generating for telestrat First cardridge
 	cat src/empty-rom/emptyrom.rom > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat src/shell/shellsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat src/basic/build/cart/basicsd2.rom   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat $(PATH_BASIC11_SD)   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat src/kernel/kernelsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	echo Generating for telestrat Second cardridge
-	cat src/forth/build/cart/TeleForth.rom > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat $(PATH_FORTH_ROM) > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat src/monitor/monitor.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat src/empty-rom/emptyrom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat src/empty-rom/emptyrom.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
@@ -128,10 +137,10 @@ twilightecard:
 	echo Generating for Twilighte card 7 banks root sd
 	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/basic/build/cart/basicsd2.rom  >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat $(PATH_BASIC11_SD)  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -164,10 +173,10 @@ twilightecard:
 	echo Generating for Twilighte card 7 banks root usb
 	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/shell/shell.rom >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat src/basic/build/cart/basicus2.rom  >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat $(PATH_BASIC11_USB)  >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/orixusb.rom	
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixusb.rom
@@ -201,21 +210,19 @@ twilightecardorixcfgkernel:
 	@echo "#    Build .r64 orixcfg (kernel, basic11 & shell )#"
 	@echo "###################################################"	
 
-	@cat src/kernel/src>headerorixcfg.bin > kernelsd.roh
-	cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
-	ls src/basic/build
-	ls src/basic/build/cart
-	cat src/basic/build/cart/basicsd2.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
-	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
-	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	#@cat src/kernel/src/headerorixcfg.bin > kernelsd.roh
+	@cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
+	@cat $(PATH_BASIC11_SD) >> roms/twilighte_card_v05/6502/kernelsd.r64
+	@cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	@cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
 	@cat roms/twilighte_card_v05/6502/kernelsd.r64 >> kernelsd.roh
 
 
 	cat src/shell/shell.rom > roms/twilighte_card_v05/6502/kernelus.r64
-	cat src/basic/build/cart/basicus2.rom >> roms/twilighte_card_v05/6502/kernelus.r64
+	cat $(PATH_BASIC11_USB) >> roms/twilighte_card_v05/6502/kernelus.r64
 	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/kernelus.r64
 	cat src/empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/kernelus.r64
-	@cat src/kernel/src>headerorixcfg.bin > kernelus.roh
+	#@cat src/kernel/src>headerorixcfg.bin > kernelus.roh
 	@cat roms/twilighte_card_v05/6502/kernelus.r64 >> kernelus.roh
 	
 
@@ -225,8 +232,8 @@ twilightecardorixcfgkernel:
 	echo "Kernelus, basic11us, shellus;/usr/share/carts/$(VERSION)/kernelus.r64" > build/etc/orixcfg/carts.cnf
 	cp roms/twilighte_card_v05/6502/kernelsd.r64 build/usr/share/carts/$(VERSION)/
 	cp roms/twilighte_card_v05/6502/kernelus.r64 build/usr/share/carts/$(VERSION)/
-	cp kernelus.roh build/usr/share/carts/$(VERSION)
-	cp kernelsd.roh build/usr/share/carts/$(VERSION)
+#	cp kernelus.roh build/usr/share/carts/$(VERSION)
+	#cp kernelsd.roh build/usr/share/carts/$(VERSION)
 
 twilightecardorixcfgforthetc:
 	@echo "###################################################"
@@ -234,9 +241,10 @@ twilightecardorixcfgforthetc:
 	@echo "###################################################"	
 
 	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/bank4321.r64
+	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
-	cat src/forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
-	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+	cat src/empty-rom/emptyrom.rom > roms/twilighte_card_v05/6502/bank4321.r64
+	#cat $(PATH_SYSTEMD_ROM) >> roms/twilighte_card_v05/6502/bank4321.r64	
 	cp roms/twilighte_card_v05/6502/bank4321.r64  roms/twilighte_card_v05/6502/fullus.bk8
 	cp roms/twilighte_card_v05/6502/bank4321.r64  roms/twilighte_card_v05/6502/fullsd.bk8
 	cat roms/twilighte_card_v05/6502/kernelus.r64 >> roms/twilighte_card_v05/6502/fullus.bk8
@@ -245,7 +253,7 @@ twilightecardorixcfgforthetc:
 
 	mkdir -p build/etc/orixcfg/
 	cp roms/twilighte_card_v05/6502/bank4321.r64 build/usr/share/carts/$(VERSION)/mfee.r64
-	echo "Monitor 2020.1-Forth 2020.1;/usr/share/carts/2020.1/mfee.r64" >> build/etc/orixcfg/carts.cnf
+	echo "Monitor 2020.1-Forth 2020.2;/usr/share/carts/2020.2/mfee.r64" >> build/etc/orixcfg/carts.cnf
 
 twilightecardorixemptyrom:
 	@echo "###################################################"
@@ -263,11 +271,11 @@ twilightecardorixstandalonerom:
 	@echo "###################################################"	
 
 	cp src/empty-rom/emptyrom.rom roms/twilighte_card_v05/6502/empty.rom
-	cp src/forth/build/cart/TeleForth.rom  roms/twilighte_card_v05/6502/
+	cp usr/share/forth/2021.2/forth.rom  roms/twilighte_card_v05/6502/
 	cp src/monitor/monitor.rom roms/twilighte_card_v05/6502/
 
 	cp src/monitor/monitor.rom build/usr/share/roms/
-	cp src/forth/build/cart/TeleForth.rom build/usr/share/roms/
+	cp usr/share/forth/2021.2/forth.rom build/usr/share/roms/
 	cat src/empty-rom/emptyrom.rom > build/usr/share/roms/empty.rom
 
 #twilightecard_64KB_blocks_29F040:
@@ -283,7 +291,7 @@ twilightecard_firmware1:
 	# 1
 	cat empty-rom/emptyrom.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	# 2
-	cat forth/build/cart/TeleForth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	# 3
 	cat monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	# 4
@@ -329,7 +337,7 @@ twilightecardnoacia:
 	echo Generating for Twilighte card no acia
 	cat empty-rom/emptyrom.rom > orixnoacia.rom
 	cat empty-rom/emptyrom.rom >> orixnoacia.rom
-	cat forth/build/cart/TeleForth.rom >> orixnoacia.rom
+	cat usr/share/forth/2021.2/forth.rom >> orixnoacia.rom
 	cat monitor/monitor.rom >> orixnoacia.rom
 	cat ../shell/shell.rom >> orixnoacia.rom
 	cat basic/bin/basic_noram.rom  >> orixnoacia.rom
