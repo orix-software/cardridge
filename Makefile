@@ -77,7 +77,7 @@ buildme:
 	@echo "##########################"
 	@echo "#    Building Shell      #"
 	@echo "##########################"
-	@cd src/shell && make
+	@cd src/shell && ./configure && make
 	@echo "##########################"
 	@echo "#    Building Empty rom  #"
 	@echo "##########################"
