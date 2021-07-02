@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/orix-software/cardridge.svg?branch=master)](https://travis-ci.org/orix-software/cardridge)
+Github action : ![cardridge](https://github.com/orix-software/cardridge/workflows/cardridge/badge.svg)
 
 Build cardridge for telestrat and twilighte card (from source code) and push it in repo.orix.oric.org
 
