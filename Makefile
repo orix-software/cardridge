@@ -56,7 +56,8 @@ init:
 	@echo Update kernel
 	@if [ -d "src/kernel" ]; then cd src/kernel && git pull && cd ../../ ; else cd src && git clone https://github.com/orix-software/kernel.git --recursive -b ${BRANCH}; fi 
 	@echo Update shell
-	@if [ -d "src/shell" ]; then  cd src/shell && rm -f src/build.inc && git pull && git submodule init && git submodule update --recursive --remote && cd ../../; else cd src && git clone https://github.com/orix-software/shell.git --recursive -b ${BRANCH}; fi 
+	@curl http://repo.orix.oric.org/dists/official/tgz/6502/shell.tgz --output shell.tgz
+	#@if [ -d "src/shell" ]; then  cd src/shell && rm -f src/build.inc && git pull && git submodule init && git submodule update --recursive --remote && cd ../../; else cd src && git clone https://github.com/orix-software/shell.git --recursive -b ${BRANCH}; fi 
 	@echo Update empty-rom
 	@if [ -d "src/empty-rom" ]; then  cd src/empty-rom  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(empty_rom_git) -b ${BRANCH} && cd ..;fi 
 	@echo Update monitor
@@ -87,7 +88,8 @@ buildme:
 	@echo "##########################"
 	@echo "#    Building Shell      #"
 	@echo "##########################"
-	@cd src/shell && ./configure && make
+	#@cd src/shell && ./configure && make
+	@gzip -dc shell.tgz | tar -tf -
 	@echo "##########################"
 	@echo "#    Building Empty rom  #"
 	@echo "##########################"
