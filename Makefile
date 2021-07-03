@@ -54,13 +54,13 @@ init:
 	@mkdir -p src/
 	@export MAKE=make
 	@echo Update kernel
-	@if [ -d "src/kernel" ]; then cd src/kernel && git pull && cd ../../ ; else cd src && git clone https://github.com/orix-software/kernel.git --recursive -b ${BRANCH}; fi 
+	@curl http://repo.orix.oric.org/dists/official/tgz/6502/kernel.tgz --output kernel.tgz
 	@echo Update shell
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/shell.tgz --output shell.tgz
-	@echo Update empty-rom
-	@curl http://repo.orix.oric.org/dists/official/tgz/6502/empty-rom.tgz --output empty-rom.tgz
+	@echo Update emptyrom
+	@curl http://repo.orix.oric.org/dists/official/tgz/6502/emptyrom.tgz --output emptyrom.tgz
 	@echo Update monitor
-	@if [ -d "src/monitor" ]; then  cd src/monitor  && git pull && git submodule  init && git submodule update --recursive --remote && cd ../../; else cd  src/ && git clone $(monitor_git) -b ${BRANCH}  && cd ..;fi 	
+	@curl http://repo.orix.oric.org/dists/official/tgz/6502/monitor.tgz --output monitor.tgz
 	@echo Update forth
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/forth.tgz --output forth.tgz
 	@echo Update systemd
@@ -87,41 +87,33 @@ buildme:
 	@echo "##########################"
 	@echo "#    Building Shell      #"
 	@echo "##########################"
-
 	@gzip -dc shell.tgz | tar -tf -
 	@echo "##########################"
 	@echo "#    Building Empty rom  #"
 	@echo "##########################"
-	@gzip -dc empty-rom.tgz | tar -tf -	
-	@cd src/empty-rom/ && make
+	@gzip -dc emptyrom.tgz | tar -tf -	
 	@echo "##########################"
 	@echo "#    Building Kernel     #"
 	@echo "##########################"
-	@cd src/kernel/ && make
+	@gzip -dc kernel.tgz | tar -tf -	
 	@echo "##########################"
 	@echo "#    Building Monitor    #"
 	@echo "##########################"	
-	@cd src/monitor && make
+	@gzip -dc monitor.tgz | tar -tf -		
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
 	@gzip -dc basic.tgz | tar -tf -
-
-	
 	@echo "##########################"
 	@echo "#    Building Forth      #"
 	@echo "##########################"
 	@gzip -dc forth.tgz | tar -tf -
-	
 	@echo "##########################"
 	@echo "#    Building Systemd    #"
 	@echo "##########################"
 	@gzip -dc systemd.tgz | tar -tf -
-	
-	
 
 
-	#@cd forth && make configure && make && make
 telestratcardridge:	
 	@echo "###################################"
 	@echo "#    Build Telestrat cardridge    #"
