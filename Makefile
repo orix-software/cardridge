@@ -47,7 +47,7 @@ PATH_BASIC11_SD=usr/share/basic11/basicsd2.rom
 PATH_FORTH_ROM=usr/share/forth/2021.2/forth.rom
 PATH_SYSTEMD_ROM=usr/share/systemd/systemd.rom
 PATH_EMPTY_ROM=usr/share/emptyrom/emptyrom.rom
-
+               
 
 LIST="empty-rom shell basic orix monitor forth"
 clean:
@@ -59,8 +59,10 @@ init:
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/kernel.tgz --output kernel.tgz
 	@echo Update shell
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/shell.tgz --output shell.tgz
+	@gzip -dc shell.tgz | tar -xvf -
 	@echo Update emptyrom
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/emptyrom.tgz --output emptyrom.tgz
+	@gzip -dc emptyrom.tgz | tar xvf -
 	@echo Update monitor
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/monitor.tgz --output monitor.tgz
 	@echo Update forth
@@ -87,33 +89,25 @@ init:
 buildme:
 
 	@echo "##########################"
-	@echo "#    Building Shell      #"
-	@echo "##########################"
-	@gzip -dc shell.tgz | tar -tf -
-	@echo "##########################"
-	@echo "#    Building Empty rom  #"
-	@echo "##########################"
-	@gzip -dc emptyrom.tgz | tar -tf -	
-	@echo "##########################"
 	@echo "#    Building Kernel     #"
 	@echo "##########################"
-	@gzip -dc kernel.tgz | tar -tf -	
+	@gzip -dc kernel.tgz | tar -xvf -	
 	@echo "##########################"
 	@echo "#    Building Monitor    #"
 	@echo "##########################"	
-	@gzip -dc monitor.tgz | tar -tf -		
+	@gzip -dc monitor.tgz | tar -xvf -		
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
-	@gzip -dc basic.tgz | tar -tf -
+	@gzip -dc basic.tgz | tar -xvf -
 	@echo "##########################"
 	@echo "#    Building Forth      #"
 	@echo "##########################"
-	@gzip -dc forth.tgz | tar -tf -
+	@gzip -dc forth.tgz | tar -xvf -
 	@echo "##########################"
 	@echo "#    Building Systemd    #"
 	@echo "##########################"
-	@gzip -dc systemd.tgz | tar -tf -
+	@gzip -dc systemd.tgz | tar -xvf -
 
 
 telestratcardridge:	
@@ -131,16 +125,14 @@ telestratcardridge:
 	cat src/monitor/monitor.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat $(PATH_EMPTY_ROM) >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat $(PATH_EMPTY_ROM) >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
-	
-	
-	
-
 
 twilightecard:
 	@echo "###################################"
 	@echo "#    Build Twilighte board ROM    #"
 	@echo "###################################"	
 	echo Generating for Twilighte card 7 banks root sd
+	ls -l usr/share/emptyrom/
+#	ls -l
 	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
