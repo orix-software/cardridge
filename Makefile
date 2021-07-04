@@ -48,6 +48,11 @@ PATH_FORTH_ROM=usr/share/forth/2021.2/forth.rom
 PATH_SYSTEMD_ROM=usr/share/systemd/systemd.rom
 PATH_EMPTY_ROM=usr/share/emptyrom/emptyrom.rom
 PATH_MONITOR_ROM=usr/share/monitor/monitor.rom
+PATH_SHELLSD_ROM=usr/share/shell/shellsd.rom
+PATH_SHELLUSB_ROM=usr/share/shell/shellus.rom
+
+PATH_KERNELSD_ROM=usr/share/kernel/kernelsd.rom
+PATH_KERNELUSB_ROM=usr/share/kernel/kernelus.rom
                
 
 LIST="empty-rom shell basic orix monitor forth"
@@ -116,9 +121,9 @@ telestratcardridge:
 
 	echo Generating for telestrat First cardridge
 	cat $(PATH_EMPTY_ROM) > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat src/shell/shellsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat $(PATH_SHELLSD_ROM) >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	cat $(PATH_BASIC11_SD)   >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
-	cat src/kernel/kernelsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
+	cat $(PATH_KERNELSD_ROM) >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	echo Generating for telestrat Second cardridge
 	cat $(PATH_FORTH_ROM) > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat $(PATH_MONITOR_ROM) >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
@@ -135,9 +140,9 @@ twilightecard:
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat $(PATH_SHELLSD_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_BASIC11_SD)  >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
+	cat $(PATH_KERNELSD_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom	
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -171,9 +176,9 @@ twilightecard:
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat src/shell/shell.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat $(PATH_SHELLUSB_ROM)>> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_BASIC11_USB)  >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/orixusb.rom	
+	cat $(PATH_KERNELUSB_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom	
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
@@ -207,16 +212,16 @@ twilightecardorixcfgkernel:
 	@echo "###################################################"	
 
 	#@cat src/kernel/src/headerorixcfg.bin > kernelsd.roh
-	@cat src/shell/shellsd.rom > roms/twilighte_card_v05/6502/kernelsd.r64
+	@cat $(PATH_SHELLSD_ROM) > roms/twilighte_card_v05/6502/kernelsd.r64
 	@cat $(PATH_BASIC11_SD) >> roms/twilighte_card_v05/6502/kernelsd.r64
-	@cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/kernelsd.r64
+	@cat $(PATH_KERNELSD_ROM) >> roms/twilighte_card_v05/6502/kernelsd.r64
 	@cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/kernelsd.r64
 	@cat roms/twilighte_card_v05/6502/kernelsd.r64 >> kernelsd.roh
 
 
-	cat src/shell/shell.rom > roms/twilighte_card_v05/6502/kernelus.r64
+	cat $(PATH_SHELLUSB_ROM)> roms/twilighte_card_v05/6502/kernelus.r64
 	cat $(PATH_BASIC11_USB) >> roms/twilighte_card_v05/6502/kernelus.r64
-	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/kernelus.r64
+	cat $(PATH_KERNELUSB_ROM) >> roms/twilighte_card_v05/6502/kernelus.r64
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/kernelus.r64
 	#@cat src/kernel/src>headerorixcfg.bin > kernelus.roh
 	@cat roms/twilighte_card_v05/6502/kernelus.r64 >> kernelus.roh
