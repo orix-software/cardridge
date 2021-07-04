@@ -47,6 +47,7 @@ PATH_BASIC11_SD=usr/share/basic11/basicsd2.rom
 PATH_FORTH_ROM=usr/share/forth/2021.2/forth.rom
 PATH_SYSTEMD_ROM=usr/share/systemd/systemd.rom
 PATH_EMPTY_ROM=usr/share/emptyrom/emptyrom.rom
+PATH_MONITOR_ROM=usr/share/monitor/monitor.rom
                
 
 LIST="empty-rom shell basic orix monitor forth"
@@ -65,6 +66,7 @@ init:
 	@gzip -dc emptyrom.tgz | tar xvf -
 	@echo Update monitor
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/monitor.tgz --output monitor.tgz
+	@gzip -dc monitor.tgz | tar -xvf -
 	@echo Update forth
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/forth.tgz --output forth.tgz
 	@echo Update systemd
@@ -92,10 +94,7 @@ buildme:
 	@echo "#    Building Kernel     #"
 	@echo "##########################"
 	@gzip -dc kernel.tgz | tar -xvf -	
-	@echo "##########################"
-	@echo "#    Building Monitor    #"
-	@echo "##########################"	
-	@gzip -dc monitor.tgz | tar -xvf -		
+
 	@echo "##########################"
 	@echo "#    Building Basic      #"
 	@echo "##########################"	
@@ -122,7 +121,7 @@ telestratcardridge:
 	cat src/kernel/kernelsd.rom >> roms/telestrat/6502/cardridge_first_slot_3_banks.rom
 	echo Generating for telestrat Second cardridge
 	cat $(PATH_FORTH_ROM) > roms/telestrat/6502/cardridge_second_slot_4_banks.rom
-	cat src/monitor/monitor.rom >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
+	cat $(PATH_MONITOR_ROM) >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat $(PATH_EMPTY_ROM) >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 	cat $(PATH_EMPTY_ROM) >> roms/telestrat/6502/cardridge_second_slot_4_banks.rom
 
@@ -131,12 +130,11 @@ twilightecard:
 	@echo "#    Build Twilighte board ROM    #"
 	@echo "###################################"	
 	echo Generating for Twilighte card 7 banks root sd
-	ls -l usr/share/emptyrom/
-#	ls -l
+
 	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixsd.rom
+	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/shell/shellsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_BASIC11_SD)  >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat src/kernel/kernelsd.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
@@ -172,7 +170,7 @@ twilightecard:
 	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/orixusb.rom
+	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/shell/shell.rom >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_BASIC11_USB)  >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat src/kernel/kernelus.rom >> roms/twilighte_card_v05/6502/orixusb.rom	
@@ -240,7 +238,7 @@ twilightecardorixcfgforthetc:
 
 	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/bank4321.r64
 	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
-	cat src/monitor/monitor.rom >> roms/twilighte_card_v05/6502/bank4321.r64
+	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/bank4321.r64
 	#cat $(PATH_SYSTEMD_ROM) >> roms/twilighte_card_v05/6502/bank4321.r64	
 	cp roms/twilighte_card_v05/6502/bank4321.r64  roms/twilighte_card_v05/6502/fullus.bk8
@@ -270,9 +268,9 @@ twilightecardorixstandalonerom:
 
 	cp $(PATH_EMPTY_ROM) roms/twilighte_card_v05/6502/empty.rom
 	cp usr/share/forth/2021.2/forth.rom  roms/twilighte_card_v05/6502/
-	cp src/monitor/monitor.rom roms/twilighte_card_v05/6502/
+	cp $(PATH_MONITOR_ROM) roms/twilighte_card_v05/6502/
 
-	cp src/monitor/monitor.rom build/usr/share/roms/
+	cp $(PATH_MONITOR_ROM) build/usr/share/roms/
 	cp usr/share/forth/2021.2/forth.rom build/usr/share/roms/
 	cat $(PATH_EMPTY_ROM) > build/usr/share/roms/empty.rom
 
