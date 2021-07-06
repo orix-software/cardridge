@@ -49,7 +49,7 @@ PATH_SYSTEMD_ROM=usr/share/systemd/systemd.rom
 PATH_EMPTY_ROM=usr/share/emptyrom/emptyrom.rom
 PATH_MONITOR_ROM=usr/share/monitor/monitor.rom
 PATH_SHELLSD_ROM=usr/share/shell/shellsd.rom
-PATH_SHELLUSB_ROM=usr/share/shell/shell.rom
+PATH_SHELLUSB_ROM=usr/share/shell/shellus.rom
 
 PATH_KERNELSD_ROM=usr/share/kernel/kernelsd.rom
 PATH_KERNELUSB_ROM=usr/share/kernel/kernelus.rom
