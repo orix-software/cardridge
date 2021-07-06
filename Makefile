@@ -32,15 +32,7 @@ HOMEDIRBIN=compiledir/
 
 INITIAL_FOLDER=`pwd`
 
-ifdef TRAVIS_BRANCH
-ifneq ($(TRAVIS_BRANCH), master)
-RELEASE=alpha
-VERSION=alpha
-else
-RELEASE:=$(shell cat VERSION)
 VERSION:=$(shell cat VERSION)
-endif
-endif
 
 PATH_BASIC11_USB=usr/share/basic11/basicus2.rom
 PATH_BASIC11_SD=usr/share/basic11/basicsd2.rom
@@ -344,9 +336,9 @@ twilightecardnoacia:
 	cat basic/bin/basic_noram.rom  >> orixnoacia.rom
 	cat ../kernel/kernelnoaciatwil.rom >> orixnoacia.rom
 
-test:
-	cd build && tar -c * > ../carts.tar &&	cd ..
-	gzip carts.tar
-	mv carts.tar.gz carts.tgz
-	php buildTestAndRelease/publish/publish2repo.php carts.tgz ${hash} 6502 tgz $(RELEASE)
+#test:
+#	cd build && tar -c * > ../carts.tar &&	cd ..
+#	gzip carts.tar
+#	mv carts.tar.gz carts.tgz
+#	php buildTestAndRelease/publish/publish2repo.php carts.tgz ${hash} 6502 tgz $(RELEASE)
 
