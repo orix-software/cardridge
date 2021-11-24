@@ -35,6 +35,7 @@ INITIAL_FOLDER=`pwd`
 VERSION:=$(shell cat VERSION)
 
 PATH_BASIC11_USB=usr/share/basic11/basicus2.rom
+PATH_BASIC11_USB_GAMES=usr/share/basic11/basicus1.rom
 PATH_BASIC11_SD=usr/share/basic11/basicsd2.rom
 PATH_FORTH_ROM=usr/share/forth/2021.2/forth.rom
 PATH_SYSTEMD_ROM=usr/share/systemd/systemd.rom
@@ -217,7 +218,13 @@ twilightecardorixcfgkernel:
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/kernelus.r64
 	#@cat src/kernel/src>headerorixcfg.bin > kernelus.roh
 	@cat roms/twilighte_card_v05/6502/kernelus.r64 >> kernelus.roh
-	
+
+	cat $(PATH_SHELLUSB_ROM)> roms/twilighte_card_v05/6502/kernelug.r64
+	cat $(PATH_BASIC11_USB_GAMES) >> roms/twilighte_card_v05/6502/kernelug.r64
+	cat $(PATH_KERNELUSB_ROM) >> roms/twilighte_card_v05/6502/kernelug.r64
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/kernelug.r64
+
+		
 
 	mkdir build/usr/share/carts/$(VERSION)/ -p
 	mkdir -p build/etc/orixcfg/
