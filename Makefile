@@ -66,9 +66,9 @@ init:
 	@mkdir -p src/
 	@export MAKE=make
 	@echo Update kernel
-	@curl http://repo.orix.oric.org/dists/official/tgz/6502/kernel.tgz --output kernel.tgz
+	@curl http://repo.orix.oric.org/dists/$(REPO_KERNEL)/tgz/6502/kernel.tgz --output kernel.tgz
 	@echo Update shell
-	@curl http://repo.orix.oric.org/dists/official/tgz/6502/shell.tgz --output shell.tgz
+	@curl http://repo.orix.oric.org/dists/$(REPO_KERNEL)/tgz/6502/shell.tgz --output shell.tgz
 	@gzip -dc shell.tgz | tar -xvf -
 	@echo Update emptyrom
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/emptyrom.tgz --output emptyrom.tgz
