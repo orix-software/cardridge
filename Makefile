@@ -48,7 +48,7 @@ PATH_KERNELSD_ROM=usr/share/kernel/kernelsd.rom
 PATH_KERNELUSB_ROM=usr/share/kernel/kernelus.rom
 
 
-ifeq ($(GITHUB_BASE_REF),)
+ifeq ($(GITHUB_BASE_REF) eq 'develop',)
     REPO_KERNEL = alpha
 	REPO_SHELL = alpha
 else
