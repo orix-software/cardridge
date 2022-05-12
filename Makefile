@@ -34,9 +34,9 @@ INITIAL_FOLDER=`pwd`
 
 VERSION:=$(shell cat VERSION)
 
-PATH_BASIC11_USB=usr/share/basic11/basicus2.rom
-PATH_BASIC11_USB_GAMES=usr/share/basic11/basicus1.rom
-PATH_BASIC11_SD=usr/share/basic11/basicsd2.rom
+PATH_BASIC11_USB=usr/share/atmos/basicus2.rom
+PATH_BASIC11_USB_GAMES=usr/share/atmos/basicus1.rom
+PATH_BASIC11_SD=usr/share/atmos/basicsd2.rom
 PATH_FORTH_ROM=usr/share/forth/2021.2/forth.rom
 PATH_SYSTEMD_ROM=usr/share/systemd/systemd.rom
 PATH_EMPTY_ROM=usr/share/emptyrom/emptyrom.rom
@@ -213,7 +213,7 @@ twilightecard:
 twilightecardorixcfgkernel:
 	@echo "###################################################"
 	@echo "#    Build .r64 orixcfg (kernel, basic11 & shell )#"
-	@echo "###################################################"	
+	@echo "###################################################"
 
 	#@cat src/kernel/src/headerorixcfg.bin > kernelsd.roh
 	@cat $(PATH_SHELLSD_ROM) > roms/twilighte_card_v05/6502/kernelsd.r64
