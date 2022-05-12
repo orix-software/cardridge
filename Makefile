@@ -46,12 +46,23 @@ PATH_SHELLUSB_ROM=usr/share/shell/shellus.rom
 
 PATH_KERNELSD_ROM=usr/share/kernel/kernelsd.rom
 PATH_KERNELUSB_ROM=usr/share/kernel/kernelus.rom
-               
+
+
+ifeq ($(GITHUB_BASE_REF),)
+    REPO_KERNEL = alpha
+	REPO_SHELL = alpha
+else
+	REPO_KERNEL = official
+	REPO_SHELL = official
+endif
+
+VERSION:=$(shell cat VERSION)
 
 LIST="empty-rom shell basic orix monitor forth"
 clean:
 	rm -rf src/*
 init:
+	@echo REPO : Kernel : $(REPO_KERNEL)
 	@mkdir -p src/
 	@export MAKE=make
 	@echo Update kernel
@@ -76,26 +87,26 @@ init:
 	@mkdir src/forth/md2hlp/src -p
 	@cp src/md2hlp/src/* src/forth/md2hlp/src
 	@cp src/md2hlp/src/md2hlp.py3 src/forth/md2hlp/src/md2hlp.py
-	@cd src/forth/md2hlp/src/ 
-	#&& dos2unix *	
+	@cd src/forth/md2hlp/src/
+	#&& dos2unix *
 	mkdir -p roms/oricutron/6502/
 	mkdir -p roms/oricutron/65c02/
 	mkdir -p roms/telestrat/6502/
 	mkdir -p roms/telestrat/65c02/
-	mkdir -p roms/twilighte_card_v05/6502/		
-	mkdir -p roms/twilighte_card_v05/65c02/	
+	mkdir -p roms/twilighte_card_v05/6502/
+	mkdir -p roms/twilighte_card_v05/65c02/
 	mkdir -p build/usr/share/carts/
-  
+
 buildme:
 
 	@echo "##########################"
 	@echo "#    Building Kernel     #"
 	@echo "##########################"
-	@gzip -dc kernel.tgz | tar -xvf -	
+	@gzip -dc kernel.tgz | tar -xvf -
 
 	@echo "##########################"
 	@echo "#    Building Basic      #"
-	@echo "##########################"	
+	@echo "##########################"
 	@gzip -dc basic.tgz | tar -xvf -
 	@echo "##########################"
 	@echo "#    Building Forth      #"
@@ -107,10 +118,10 @@ buildme:
 	@gzip -dc systemd.tgz | tar -xvf -
 
 
-telestratcardridge:	
+telestratcardridge:
 	@echo "###################################"
 	@echo "#    Build Telestrat cardridge    #"
-	@echo "###################################"	
+	@echo "###################################"
 
 	echo Generating for telestrat First cardridge
 	cat $(PATH_EMPTY_ROM) > roms/telestrat/6502/cardridge_first_slot_3_banks.rom
@@ -126,7 +137,7 @@ telestratcardridge:
 twilightecard:
 	@echo "###################################"
 	@echo "#    Build Twilighte board ROM    #"
-	@echo "###################################"	
+	@echo "###################################"
 	echo Generating for Twilighte card 7 banks root sd
 
 	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/orixsd.rom
@@ -135,7 +146,7 @@ twilightecard:
 	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_SHELLSD_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_BASIC11_SD)  >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat $(PATH_KERNELSD_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom	
+	cat $(PATH_KERNELSD_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -147,7 +158,7 @@ twilightecard:
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom	
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
@@ -163,7 +174,7 @@ twilightecard:
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixsd.rom
 	@echo "##############################################"
 	@echo "#    Build Twilighte board ROM  USB DEFAULT  #"
-	@echo "##############################################"	
+	@echo "##############################################"
 	echo Generating for Twilighte card 7 banks root usb
 	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
@@ -171,7 +182,7 @@ twilightecard:
 	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_SHELLUSB_ROM)>> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_BASIC11_USB)  >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_KERNELUSB_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom	
+	cat $(PATH_KERNELUSB_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
@@ -183,7 +194,7 @@ twilightecard:
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom	
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
@@ -224,7 +235,7 @@ twilightecardorixcfgkernel:
 	cat $(PATH_KERNELUSB_ROM) >> roms/twilighte_card_v05/6502/kernelug.r64
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/kernelug.r64
 
-		
+
 
 	mkdir build/usr/share/carts/$(VERSION)/ -p
 	mkdir -p build/etc/orixcfg/
@@ -238,13 +249,13 @@ twilightecardorixcfgkernel:
 twilightecardorixcfgforthetc:
 	@echo "###################################################"
 	@echo "#    Build .r64 orixcfg forth                     #"
-	@echo "###################################################"	
+	@echo "###################################################"
 
 	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/bank4321.r64
 	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/bank4321.r64
 	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/bank4321.r64
-	#cat $(PATH_SYSTEMD_ROM) >> roms/twilighte_card_v05/6502/bank4321.r64	
+	#cat $(PATH_SYSTEMD_ROM) >> roms/twilighte_card_v05/6502/bank4321.r64
 	cp roms/twilighte_card_v05/6502/bank4321.r64  roms/twilighte_card_v05/6502/fullus.bk8
 	cp roms/twilighte_card_v05/6502/bank4321.r64  roms/twilighte_card_v05/6502/fullsd.bk8
 	cat roms/twilighte_card_v05/6502/kernelus.r64 >> roms/twilighte_card_v05/6502/fullus.bk8
@@ -258,8 +269,8 @@ twilightecardorixcfgforthetc:
 twilightecardorixemptyrom:
 	@echo "###################################################"
 	@echo "#    Build .r64 empty rom .r64                    #"
-	@echo "###################################################"	
-	
+	@echo "###################################################"
+
 	cat $(PATH_EMPTY_ROM) > build/usr/share/carts/emptyset.r64
 	cat $(PATH_EMPTY_ROM) >> build/usr/share/carts/emptyset.r64
 	cat $(PATH_EMPTY_ROM) >> build/usr/share/carts/emptyset.r64
@@ -267,8 +278,8 @@ twilightecardorixemptyrom:
 
 twilightecardorixstandalonerom:
 	@echo "###################################################"
-	@echo "#    Build .rom standalone                     #"
-	@echo "###################################################"	
+	@echo "#    Build .rom standalone                        #"
+	@echo "###################################################"
 
 	cp $(PATH_EMPTY_ROM) roms/twilighte_card_v05/6502/empty.rom
 	cp usr/share/forth/2021.2/forth.rom  roms/twilighte_card_v05/6502/
@@ -301,11 +312,11 @@ twilightecard_firmware1:
 	# 6
 	cat ../kernel/kernel.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	# 7
-	cat ca65.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
+	cat ca65.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat ../empty-rom32/emptyrom8.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat ../empty-rom32/emptyrom9.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat ../empty-rom32/emptyrom10.rom >> roms/twilighte_card_v05/6502/orixsd.rom
-	cat ../empty-rom32/emptyrom11.rom >> roms/twilighte_card_v05/6502/orixsd.rom	
+	cat ../empty-rom32/emptyrom11.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat ../empty-rom32/emptyrom12.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat ../empty-rom32/emptyrom13.rom >> roms/twilighte_card_v05/6502/orixsd.rom
 	cat ../empty-rom32/emptyrom14.rom >> roms/twilighte_card_v05/6502/orixsd.rom
