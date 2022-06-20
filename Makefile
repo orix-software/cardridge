@@ -47,8 +47,9 @@ PATH_SHELLUSB_ROM=usr/share/shell/shellus.rom
 PATH_KERNELSD_ROM=usr/share/kernel/kernelsd.rom
 PATH_KERNELUSB_ROM=usr/share/kernel/kernelus.rom
 
+@echo  GITHUB_REF $(GITHUB_REF)
 
-ifeq ($(GITHUB_BASE_REF) eq 'develop',)
+ifeq ($(GITHUB_REF) eq 'develop',)
     REPO_KERNEL = alpha
 	REPO_SHELL = alpha
 else
@@ -67,8 +68,8 @@ init:
 	@export MAKE=make
 	@echo Update kernel $(REPO_KERNEL)/tgz/6502/kernel.tgz 
 	@curl http://repo.orix.oric.org/dists/$(REPO_KERNEL)/tgz/6502/kernel.tgz --output kernel.tgz
-	@echo Update shell $(REPO_KERNEL)/tgz/6502/shell.tgz
-	@curl http://repo.orix.oric.org/dists/$(REPO_KERNEL)/tgz/6502/shell.tgz --output shell.tgz
+	@echo Update shell $(REPO_SHELL)/tgz/6502/shell.tgz
+	@curl http://repo.orix.oric.org/dists/$(REPO_SHELL)/tgz/6502/shell.tgz --output shell.tgz
 	@gzip -dc shell.tgz | tar -xvf -
 	@echo Update emptyrom
 	@curl http://repo.orix.oric.org/dists/official/tgz/6502/emptyrom.tgz --output emptyrom.tgz
