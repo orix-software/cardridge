@@ -47,7 +47,7 @@ PATH_SHELLUSB_ROM=usr/share/shell/shellus.rom
 PATH_KERNELSD_ROM=usr/share/kernel/kernelsd.rom
 PATH_KERNELUSB_ROM=usr/share/kernel/kernelus.rom
 
-@echo  GITHUB_REF $(GITHUB_REF)
+
 
 ifeq ($(GITHUB_REF) eq 'develop',)
     REPO_KERNEL = alpha
@@ -63,10 +63,11 @@ LIST="empty-rom shell basic orix monitor forth"
 clean:
 	rm -rf src/*
 init:
+	@echo GITHUB_REF $(GITHUB_REF)
 	@echo REPO : Kernel : $(REPO_KERNEL)
 	@mkdir -p src/
 	@export MAKE=make
-	@echo Update kernel $(REPO_KERNEL)/tgz/6502/kernel.tgz 
+	@echo Update kernel $(REPO_KERNEL)/tgz/6502/kernel.tgz
 	@curl http://repo.orix.oric.org/dists/$(REPO_KERNEL)/tgz/6502/kernel.tgz --output kernel.tgz
 	@echo Update shell $(REPO_SHELL)/tgz/6502/shell.tgz
 	@curl http://repo.orix.oric.org/dists/$(REPO_SHELL)/tgz/6502/shell.tgz --output shell.tgz
