@@ -7,7 +7,6 @@ For Basic11, it require official XA version from linux distribution
 # Build
 make
 
-
 # Install in oricutron
 * Put kernel.rom in bank 7
 * Put basic_noram.rom in bank 6
