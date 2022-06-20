@@ -32,7 +32,7 @@ HOMEDIRBIN=compiledir/
 
 INITIAL_FOLDER=`pwd`
 
-VERSION:=$(shell cat VERSION)
+
 
 PATH_BASIC11_USB=usr/share/atmos/basicus2.rom
 PATH_BASIC11_USB_GAMES=usr/share/atmos/basicus1.rom
