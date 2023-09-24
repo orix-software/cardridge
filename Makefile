@@ -178,38 +178,39 @@ twilightecard:
 	@echo "#    Build Twilighte board ROM  USB DEFAULT  #"
 	@echo "##############################################"
 	echo Generating for Twilighte card 7 banks root usb
-	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_SHELLUSB_ROM)>> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_BASIC11_USB)  >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_KERNELUSB_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
-	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/orixusb.rom
+	mkdir -p roms/twilighte_card_v05/6502/$(VERSION)
+	cat $(PATH_EMPTY_ROM) > roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat usr/share/forth/2021.2/forth.rom >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_MONITOR_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_SHELLUSB_ROM)>> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_BASIC11_USB)  >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_KERNELUSB_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
+	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/$(VERSION)/orixusb.rom
 
 
 twilightecardorixcfgkernel:
@@ -236,7 +237,6 @@ twilightecardorixcfgkernel:
 	cat $(PATH_BASIC11_USB_GAMES) >> roms/twilighte_card_v05/6502/kernelug.r64
 	cat $(PATH_KERNELUSB_ROM) >> roms/twilighte_card_v05/6502/kernelug.r64
 	cat $(PATH_EMPTY_ROM) >> roms/twilighte_card_v05/6502/kernelug.r64
-
 
 
 	mkdir build/usr/share/carts/$(VERSION)/ -p
